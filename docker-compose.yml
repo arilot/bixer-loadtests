@@ -1,0 +1,8 @@
+version: '3'
+services:
+  jmeter:
+    image: arilot/docker-jmeter
+    command: ["-n", "-t", "/bixer.jmx", "-j", "/data/jmeter.log", "-l", "/data/result.jtl", "-X"]
+    volumes:
+      - ./data:/data
+      - ./bixer.jmx:/bixer.jmx
