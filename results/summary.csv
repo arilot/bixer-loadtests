@@ -1,0 +1,4 @@
+Label,# Samples,Average,Min,Max,Std. Dev.,Error %,Throughput,Received KB/sec,Sent KB/sec,Avg. Bytes
+Sell,306,355,133,1276,263.62,8.497%,5.05025,3.23,2.88,655.0
+Buy,303,335,133,1589,244.24,7.591%,5.05135,3.24,2.87,655.9
+TOTAL,609,345,133,1589,254.36,8.046%,10.03014,6.42,5.71,655.5
