@@ -1,0 +1,646 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="4.0" jmeter="4.0 r1823414">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Bixer loadtest" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Main" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">10</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">100</stringProp>
+        <longProp name="ThreadGroup.start_time">1373789594000</longProp>
+        <longProp name="ThreadGroup.end_time">1373789594000</longProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">60</stringProp>
+        <stringProp name="ThreadGroup.delay">1</stringProp>
+        <stringProp name="TestPlan.comments">Virtual Users Running Scenario 1. 
+Make test last 1 minute (see Scheduler)</stringProp>
+        <boolProp name="ThreadGroup.delayedStart">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">ex.zhigui.com</stringProp>
+          <stringProp name="HTTPSampler.port">443</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path"></stringProp>
+          <stringProp name="HTTPSampler.concurrentPool">4</stringProp>
+          <stringProp name="HTTPSampler.connect_timeout">5000</stringProp>
+          <stringProp name="HTTPSampler.response_timeout">30000</stringProp>
+        </ConfigTestElement>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Sell" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">${NEW_DATA}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+          <stringProp name="HTTPSampler.path">/v1/trade/orders</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="User-Agent" elementType="Header">
+                <stringProp name="Header.name">User-Agent</stringProp>
+                <stringProp name="Header.value"> Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:48.0) Gecko/20100101 Firefox/48.0</stringProp>
+              </elementProp>
+              <elementProp name="Accept" elementType="Header">
+                <stringProp name="Header.name">Accept</stringProp>
+                <stringProp name="Header.value"> text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</stringProp>
+              </elementProp>
+              <elementProp name="Accept-Language" elementType="Header">
+                <stringProp name="Header.name">Accept-Language</stringProp>
+                <stringProp name="Header.value"> fr,en-US;q=0.7,en;q=0.3</stringProp>
+              </elementProp>
+              <elementProp name="Accept-Encoding" elementType="Header">
+                <stringProp name="Header.name">Accept-Encoding</stringProp>
+                <stringProp name="Header.value"> gzip, deflate</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">API-KEY</stringProp>
+                <stringProp name="Header.value">${HEADER_API_KEY}</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">API-SIGNATURE-METHOD</stringProp>
+                <stringProp name="Header.value">${HEADER_API_SIGNATURE_METHOD}</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">API-SIGNATURE-VERSION</stringProp>
+                <stringProp name="Header.value">${HEADER_API_SIGNATURE_VERSION}</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">API-TIMESTAMP</stringProp>
+                <stringProp name="Header.value">${HEADER_API_TIMESTAMP}</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">API-UNIQUE-ID</stringProp>
+                <stringProp name="Header.value">${HEADER_API_UNIQUE_ID}</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">API-SIGNATURE</stringProp>
+                <stringProp name="Header.value">${HEADER_API_SIGNATURE}</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">X-Real-IP</stringProp>
+                <stringProp name="Header.value">${X_Real_IP}</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">X-Forwarded-For</stringProp>
+                <stringProp name="Header.value">${X_Forwarded_For}</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="script">import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.HashMap;
+import java.util.Map;
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import java.text.ParseException;
+import java.math.BigInteger;
+import java.security.InvalidKeyException;
+import org.apache.commons.codec.binary.Hex;
+import java.nio.charset.StandardCharsets;
+import java.security.GeneralSecurityException;
+
+String key = &quot;AAAADBVRLP0Kx6fONEA6SE3G&quot;;
+String secret = &quot;1hDhYoVIDaIBmaBw&quot;;
+String HEADER_API_KEY = &quot;API-KEY&quot;;
+String HEADER_API_SIGNATURE_METHOD = &quot;API-SIGNATURE-METHOD&quot;;
+String HEADER_API_SIGNATURE_VERSION = &quot;API-SIGNATURE-VERSION&quot;;
+String HEADER_API_TIMESTAMP = &quot;API-TIMESTAMP&quot;;
+String HEADER_API_UNIQUE_ID = &quot;API-UNIQUE-ID&quot;;
+String SIGNATURE_METHOD = &quot;HmacSHA256&quot;;
+String SIGNATURE_VERSION = &quot;1&quot;;
+
+String method = &quot;POST&quot;;
+String path = &quot;/v1/trade/orders&quot;;
+String uniqueId = UUID.randomUUID().toString().replace(&quot;-&quot;, &quot;&quot;);
+
+StringBuilder payloadToSign = (new StringBuilder(1024)).append(method).append(&apos;\n&apos;).append(&quot;ex.zhigui.com&quot;).append(&apos;\n&apos;).append(path).append(&apos;\n&apos;);
+payloadToSign.append(&apos;\n&apos;);
+
+String jsonBody = &quot;{\&quot;amount\&quot;:\&quot;1.8\&quot;,\&quot;type\&quot;:\&quot;SELL_LIMIT\&quot;,\&quot;price\&quot;:\&quot;1.2\&quot;,\&quot;symbol\&quot;:\&quot;BTC_USDT\&quot;}&quot;;
+vars.put(&quot;NEW_DATA&quot;, jsonBody);
+String timestamp = String.valueOf(System.currentTimeMillis());
+
+headerList = new ArrayList();
+headerList.add(HEADER_API_KEY + &quot;: &quot; + key);
+headerList.add(HEADER_API_SIGNATURE_METHOD + &quot;: HmacSHA256&quot;);
+headerList.add(HEADER_API_SIGNATURE_VERSION + &quot;: 1&quot;);
+headerList.add(HEADER_API_TIMESTAMP + &quot;: &quot; + timestamp);
+headerList.add(HEADER_API_UNIQUE_ID + &quot;: &quot; + uniqueId);
+Collections.sort(headerList);
+Iterator var16 = headerList.iterator();
+
+while (var16.hasNext()) {
+    String header = (String) var16.next();
+    payloadToSign.append(header).append(&apos;\n&apos;);
+}
+
+//todo test
+vars.put(&quot;X_Real_IP&quot;, &quot;193.238.36.154&quot;);
+vars.put(&quot;X_Forwarded_For&quot;, &quot;193.238.36.154&quot;);
+
+vars.put(&quot;HEADER_API_KEY&quot;, key);
+
+vars.put(&quot;HEADER_API_SIGNATURE_METHOD&quot;, SIGNATURE_METHOD);
+vars.put(&quot;HEADER_API_SIGNATURE_VERSION&quot;, SIGNATURE_VERSION);
+vars.put(&quot;HEADER_API_TIMESTAMP&quot;, timestamp);
+vars.put(&quot;HEADER_API_UNIQUE_ID&quot;, uniqueId);
+payloadToSign.append(jsonBody);
+byte[] data = payloadToSign.toString().getBytes(StandardCharsets.UTF_8);
+SecretKeySpec skey = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), &quot;HmacSHA256&quot;);
+
+Mac mac;
+try {
+  mac = Mac.getInstance(&quot;HmacSHA256&quot;);
+  mac.init(skey);
+} catch (GeneralSecurityException var5) {
+  throw new RuntimeException(var5);
+}
+mac.update(data);
+char[] HEX_CHARS = &quot;0123456789abcdef&quot;.toCharArray();
+byte[] b = mac.doFinal();
+StringBuilder sb = new StringBuilder(b.length &lt;&lt; 2);
+byte[] var2 = b;
+int var3 = b.length;
+
+for(int var4 = 0; var4 &lt; var3; ++var4) {
+  byte x = var2[var4];
+  int hi = (x &amp; 240) &gt;&gt; 4;
+  int lo = x &amp; 15;
+  sb.append(HEX_CHARS[hi]);
+  sb.append(HEX_CHARS[lo]);
+}
+String sign = sb.toString().trim();
+vars.put(&quot;HEADER_API_SIGNATURE&quot;, sign);</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assertion" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49586">200</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">1</intProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+          </ResponseAssertion>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Buy" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">${NEW_DATA}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+          <stringProp name="HTTPSampler.path">/v1/trade/orders</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="User-Agent" elementType="Header">
+                <stringProp name="Header.name">User-Agent</stringProp>
+                <stringProp name="Header.value"> Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:48.0) Gecko/20100101 Firefox/48.0</stringProp>
+              </elementProp>
+              <elementProp name="Accept" elementType="Header">
+                <stringProp name="Header.name">Accept</stringProp>
+                <stringProp name="Header.value"> text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</stringProp>
+              </elementProp>
+              <elementProp name="Accept-Language" elementType="Header">
+                <stringProp name="Header.name">Accept-Language</stringProp>
+                <stringProp name="Header.value"> fr,en-US;q=0.7,en;q=0.3</stringProp>
+              </elementProp>
+              <elementProp name="Accept-Encoding" elementType="Header">
+                <stringProp name="Header.name">Accept-Encoding</stringProp>
+                <stringProp name="Header.value"> gzip, deflate</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">API-KEY</stringProp>
+                <stringProp name="Header.value">${HEADER_API_KEY}</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">API-SIGNATURE-METHOD</stringProp>
+                <stringProp name="Header.value">${HEADER_API_SIGNATURE_METHOD}</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">API-SIGNATURE-VERSION</stringProp>
+                <stringProp name="Header.value">${HEADER_API_SIGNATURE_VERSION}</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">API-TIMESTAMP</stringProp>
+                <stringProp name="Header.value">${HEADER_API_TIMESTAMP}</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">API-UNIQUE-ID</stringProp>
+                <stringProp name="Header.value">${HEADER_API_UNIQUE_ID}</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">API-SIGNATURE</stringProp>
+                <stringProp name="Header.value">${HEADER_API_SIGNATURE}</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">X-Real-IP</stringProp>
+                <stringProp name="Header.value">${X_Real_IP}</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">X-Forwarded-For</stringProp>
+                <stringProp name="Header.value">${X_Forwarded_For}</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="script">import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.HashMap;
+import java.util.Map;
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import java.text.ParseException;
+import java.math.BigInteger;
+import java.security.InvalidKeyException;
+import org.apache.commons.codec.binary.Hex;
+import java.nio.charset.StandardCharsets;
+import java.security.GeneralSecurityException;
+
+String key = &quot;AAAADBVRLP0Kx6fONEA6SE3G&quot;;
+String secret = &quot;1hDhYoVIDaIBmaBw&quot;;
+String HEADER_API_KEY = &quot;API-KEY&quot;;
+String HEADER_API_SIGNATURE_METHOD = &quot;API-SIGNATURE-METHOD&quot;;
+String HEADER_API_SIGNATURE_VERSION = &quot;API-SIGNATURE-VERSION&quot;;
+String HEADER_API_TIMESTAMP = &quot;API-TIMESTAMP&quot;;
+String HEADER_API_UNIQUE_ID = &quot;API-UNIQUE-ID&quot;;
+String SIGNATURE_METHOD = &quot;HmacSHA256&quot;;
+String SIGNATURE_VERSION = &quot;1&quot;;
+
+String method = &quot;POST&quot;;
+String path = &quot;/v1/trade/orders&quot;;
+String uniqueId = UUID.randomUUID().toString().replace(&quot;-&quot;, &quot;&quot;);
+
+StringBuilder payloadToSign = (new StringBuilder(1024)).append(method).append(&apos;\n&apos;).append(&quot;ex.zhigui.com&quot;).append(&apos;\n&apos;).append(path).append(&apos;\n&apos;);
+payloadToSign.append(&apos;\n&apos;);
+
+String jsonBody = &quot;{\&quot;amount\&quot;:\&quot;1.8\&quot;,\&quot;type\&quot;:\&quot;BUY_LIMIT\&quot;,\&quot;price\&quot;:\&quot;1.2\&quot;,\&quot;symbol\&quot;:\&quot;BTC_USDT\&quot;}&quot;;
+vars.put(&quot;NEW_DATA&quot;, jsonBody);
+String timestamp = String.valueOf(System.currentTimeMillis());
+
+headerList = new ArrayList();
+headerList.add(HEADER_API_KEY + &quot;: &quot; + key);
+headerList.add(HEADER_API_SIGNATURE_METHOD + &quot;: HmacSHA256&quot;);
+headerList.add(HEADER_API_SIGNATURE_VERSION + &quot;: 1&quot;);
+headerList.add(HEADER_API_TIMESTAMP + &quot;: &quot; + timestamp);
+headerList.add(HEADER_API_UNIQUE_ID + &quot;: &quot; + uniqueId);
+Collections.sort(headerList);
+Iterator var16 = headerList.iterator();
+
+while (var16.hasNext()) {
+    String header = (String) var16.next();
+    payloadToSign.append(header).append(&apos;\n&apos;);
+}
+
+//todo test
+vars.put(&quot;X_Real_IP&quot;, &quot;193.238.36.154&quot;);
+vars.put(&quot;X_Forwarded_For&quot;, &quot;193.238.36.154&quot;);
+
+vars.put(&quot;HEADER_API_KEY&quot;, key);
+
+vars.put(&quot;HEADER_API_SIGNATURE_METHOD&quot;, SIGNATURE_METHOD);
+vars.put(&quot;HEADER_API_SIGNATURE_VERSION&quot;, SIGNATURE_VERSION);
+vars.put(&quot;HEADER_API_TIMESTAMP&quot;, timestamp);
+vars.put(&quot;HEADER_API_UNIQUE_ID&quot;, uniqueId);
+payloadToSign.append(jsonBody);
+byte[] data = payloadToSign.toString().getBytes(StandardCharsets.UTF_8);
+SecretKeySpec skey = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), &quot;HmacSHA256&quot;);
+
+Mac mac;
+try {
+  mac = Mac.getInstance(&quot;HmacSHA256&quot;);
+  mac.init(skey);
+} catch (GeneralSecurityException var5) {
+  throw new RuntimeException(var5);
+}
+mac.update(data);
+char[] HEX_CHARS = &quot;0123456789abcdef&quot;.toCharArray();
+byte[] b = mac.doFinal();
+StringBuilder sb = new StringBuilder(b.length &lt;&lt; 2);
+byte[] var2 = b;
+int var3 = b.length;
+
+for(int var4 = 0; var4 &lt; var3; ++var4) {
+  byte x = var2[var4];
+  int hi = (x &amp; 240) &gt;&gt; 4;
+  int lo = x &amp; 15;
+  sb.append(HEX_CHARS[hi]);
+  sb.append(HEX_CHARS[lo]);
+}
+String sign = sb.toString().trim();
+vars.put(&quot;HEADER_API_SIGNATURE&quot;, sign);</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assertion" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49586">200</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">1</intProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+          </ResponseAssertion>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>true</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>true</responseData>
+            <samplerData>true</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>true</responseHeaders>
+            <requestHeaders>true</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <fileName>true</fileName>
+            <hostname>true</hostname>
+            <threadCounts>true</threadCounts>
+            <sampleCount>true</sampleCount>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="TestPlan.comments">For scripting only</stringProp>
+        <stringProp name="filename">/home/crazyman/arilot/bixer/test.jmx</stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="GraphVisualizer" testclass="ResultCollector" testname="Graph Results" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
