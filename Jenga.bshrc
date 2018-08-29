@@ -1,0 +1,89 @@
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.HashMap;
+import java.util.Map;
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import java.text.ParseException;
+import java.math.BigInteger;
+import java.security.InvalidKeyException;
+import org.apache.commons.codec.binary.Hex;
+import java.nio.charset.StandardCharsets;
+import java.security.GeneralSecurityException;
+
+String key = "AAAADBVRLP0Kx6fONEA6SE3G";
+String secret = "1535185254523";
+String HEADER_API_KEY = "API-KEY";
+String HEADER_API_SIGNATURE_METHOD = "API-SIGNATURE-METHOD";
+String HEADER_API_SIGNATURE_VERSION = "API-SIGNATURE-VERSION";
+String HEADER_API_TIMESTAMP = "API-TIMESTAMP";
+String HEADER_API_UNIQUE_ID = "API-UNIQUE-ID";
+String SIGNATURE_METHOD = "HmacSHA256";
+String SIGNATURE_VERSION = "1";
+
+String method = "POST";
+String path = "/v1/trade/orders";
+String uniqueId = UUID.randomUUID().toString().replace("-", "");
+
+StringBuilder payloadToSign = (new StringBuilder(1024)).append(method).append('\n').append("ex.zhigui.com").append('\n').append(path).append('\n');
+payloadToSign.append('\n');
+
+String jsonBody = "{\n\"amount\": \"1.8\"\n\"type\": \"BUY_LIMIT\"\n\"price\":\" \"1.2\"\n\"symbol\": \"BTC_USDT\"\n}";
+vars.put("NEW_DATA", jsonBody);
+String timestamp = String.valueOf(System.currentTimeMillis());
+
+headerList = new ArrayList();
+headerList.add(HEADER_API_KEY + ": " + key);
+headerList.add(HEADER_API_SIGNATURE_METHOD + ": HmacSHA256");
+headerList.add(HEADER_API_SIGNATURE_VERSION + ": 1");
+headerList.add(HEADER_API_TIMESTAMP + ": " + timestamp);
+headerList.add(HEADER_API_UNIQUE_ID + ": " + uniqueId);
+Collections.sort(headerList);
+Iterator var16 = headerList.iterator();
+
+while (var16.hasNext()) {
+    String header = (String) var16.next();
+    payloadToSign.append(header).append('\n');
+}
+
+//todo test
+vars.put("X_Real_IP", "193.238.36.154");
+vars.put("X_Forwarded_For", "193.238.36.154");
+
+vars.put("HEADER_API_KEY", key);
+
+vars.put("HEADER_API_SIGNATURE_METHOD", SIGNATURE_METHOD);
+vars.put("HEADER_API_SIGNATURE_VERSION", SIGNATURE_VERSION);
+vars.put("HEADER_API_TIMESTAMP", timestamp);
+vars.put("HEADER_API_UNIQUE_ID", uniqueId);
+payloadToSign.append(jsonBody);
+
+byte[] data = payloadToSign.toString().getBytes(StandardCharsets.UTF_8);
+SecretKeySpec skey = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "HmacSHA256");
+
+Mac mac;
+try {
+  mac = Mac.getInstance("HmacSHA256");
+  mac.init(skey);
+} catch (GeneralSecurityException var5) {
+  throw new RuntimeException(var5);
+}
+mac.update(data);
+char[] HEX_CHARS = "0123456789abcdef".toCharArray();
+byte[] b = mac.doFinal();
+StringBuilder sb = new StringBuilder(b.length << 2);
+byte[] var2 = b;
+int var3 = b.length;
+
+for(int var4 = 0; var4 < var3; ++var4) {
+  byte x = var2[var4];
+  int hi = (x & 240) >> 4;
+  int lo = x & 15;
+  sb.append(HEX_CHARS[hi]);
+  sb.append(HEX_CHARS[lo]);
+}
+String sign = sb.toString().trim();
+vars.put("HEADER_API_SIGNATURE", sign);
