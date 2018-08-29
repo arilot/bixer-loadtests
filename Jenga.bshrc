@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 
 String key = "AAAADBVRLP0Kx6fONEA6SE3G";
-String secret = "1535185254523";
+String secret = "1hDhYoVIDaIBmaBw";
 String HEADER_API_KEY = "API-KEY";
 String HEADER_API_SIGNATURE_METHOD = "API-SIGNATURE-METHOD";
 String HEADER_API_SIGNATURE_VERSION = "API-SIGNATURE-VERSION";
